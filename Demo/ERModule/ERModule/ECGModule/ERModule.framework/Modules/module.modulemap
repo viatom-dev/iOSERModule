@@ -1,0 +1,6 @@
+framework module ERModule {
+  umbrella header "ERModule.h"
+
+  export *
+  module * { export * }
+}

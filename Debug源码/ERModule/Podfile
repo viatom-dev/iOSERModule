@@ -1,0 +1,11 @@
+# add pods for desired Firebase products
+# https://firebase.google.com/docs/ios/setup#available-pods
+use_frameworks!
+platform :ios, '10.0'
+inhibit_all_warnings!
+target 'ERModule' do
+  pod 'Masonry'
+  pod 'AFNetworking'
+  pod 'FMDB'
+end
+

@@ -1,0 +1,995 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		650176D1261D804000B97844 /* UIBatteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 650176D0261D804000B97844 /* UIBatteryView.m */; };
+		650176F2261E95D400B97844 /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 650176EE261E95D400B97844 /* JKDBModel.m */; };
+		650176F3261E95D400B97844 /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 650176EF261E95D400B97844 /* JKDBHelper.m */; };
+		65017713261EA91C00B97844 /* VTMCalibrate.m in Sources */ = {isa = PBXBuildFile; fileRef = 650176FC261EA91C00B97844 /* VTMCalibrate.m */; };
+		65017719261EA91C00B97844 /* VTMBLEParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65017709261EA91C00B97844 /* VTMBLEParser.m */; };
+		6501771A261EA91C00B97844 /* VTMBLESend.m in Sources */ = {isa = PBXBuildFile; fileRef = 65017710261EA91C00B97844 /* VTMBLESend.m */; };
+		6501771B261EA91C00B97844 /* VTMBLEReceive.m in Sources */ = {isa = PBXBuildFile; fileRef = 65017711261EA91C00B97844 /* VTMBLEReceive.m */; };
+		6501771C261EA91C00B97844 /* VTMURATUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 65017712261EA91C00B97844 /* VTMURATUtils.m */; };
+		6501773B261FE4EF00B97844 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6501773A261FE4EF00B97844 /* CoreData.framework */; };
+		650177A02620434000B97844 /* ERRecordECG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6501779F2620434000B97844 /* ERRecordECG.m */; };
+		650177A62620435C00B97844 /* ERDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 650177A52620435C00B97844 /* ERDeviceInfo.m */; };
+		650177E32620519100B97844 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 650177E12620519100B97844 /* MBProgressHUD.m */; };
+		655C097F261C3AC0001A45C7 /* VTBLEUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C097C261C3AC0001A45C7 /* VTBLEUtils.m */; };
+		655C0980261C3AC0001A45C7 /* VTDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C097E261C3AC0001A45C7 /* VTDevice.m */; };
+		655C09A1261C408C001A45C7 /* VTER1Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 655C09A0261C408C001A45C7 /* VTER1Utils.mm */; };
+		655C09BD261C4936001A45C7 /* VTER1RealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C09BC261C4936001A45C7 /* VTER1RealViewController.m */; };
+		655C09D4261C50E8001A45C7 /* VTCustomText.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C09D3261C50E8001A45C7 /* VTCustomText.m */; };
+		655C09F2261C79FC001A45C7 /* VTER1RealView.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C09F1261C79FC001A45C7 /* VTER1RealView.m */; };
+		655C09F8261C7ABA001A45C7 /* VTStartUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C09F7261C7ABA001A45C7 /* VTStartUtils.m */; };
+		655C09FE261C828C001A45C7 /* VTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 655C09FD261C828C001A45C7 /* VTNavigationViewController.m */; };
+		655C0A03261C86BB001A45C7 /* ER1RealView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655C0A02261C86BB001A45C7 /* ER1RealView.xib */; };
+		6582D784262430F900822397 /* ERFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D783262430F900822397 /* ERFileManager.m */; };
+		6582D79326243B8C00822397 /* ERSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D79226243B8C00822397 /* ERSyncManager.m */; };
+		6582D7A4262460BD00822397 /* VTER1HistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D7A2262460BD00822397 /* VTER1HistoryCell.m */; };
+		6582D7A5262460BD00822397 /* VTER1HistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6582D7A3262460BD00822397 /* VTER1HistoryCell.xib */; };
+		6582D7CF26253BC300822397 /* VTER1HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D7CD26253BC300822397 /* VTER1HistoryViewController.m */; };
+		6582D7D026253BC300822397 /* VTER1HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6582D7CE26253BC300822397 /* VTER1HistoryViewController.xib */; };
+		6582D7D72625780200822397 /* ECGReportInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D7D42625780200822397 /* ECGReportInfoData.m */; };
+		6582D7D82625780200822397 /* ECGReportInfoData.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6582D7D52625780200822397 /* ECGReportInfoData.xib */; };
+		6582D7DE262578CE00822397 /* VTERUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D7DD262578CE00822397 /* VTERUser.m */; };
+		6582D7E52625797700822397 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D7E42625797700822397 /* UIColor+Extensions.m */; };
+		6582D7EE262587DC00822397 /* ViaReportWave.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D7ED262587DC00822397 /* ViaReportWave.m */; };
+		6582D7F426258B1000822397 /* ERECGReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D7F226258B1000822397 /* ERECGReport.m */; };
+		6582D7FA26258D0700822397 /* UIView+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D7F826258D0700822397 /* UIView+Additional.m */; };
+		6582D80326258E1800822397 /* ViaPDFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D80226258E1800822397 /* ViaPDFManager.m */; };
+		6582D82026259E2700822397 /* ERPdfReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D81F26259E2700822397 /* ERPdfReportViewController.m */; };
+		6582D82626259EBB00822397 /* QLPdfPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D82526259EBB00822397 /* QLPdfPreviewItem.m */; };
+		6582D8362626794300822397 /* VTScanDashboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 6582D8352626794300822397 /* VTScanDashboard.m */; };
+		6582D83826267D9000822397 /* VTScanDashboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6582D83726267D9000822397 /* VTScanDashboard.xib */; };
+		65A050B6261BF13300DA3BDA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A050B5261BF13300DA3BDA /* AppDelegate.m */; };
+		65A050BC261BF13300DA3BDA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A050BB261BF13300DA3BDA /* ViewController.m */; };
+		65A050BF261BF13300DA3BDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65A050BD261BF13300DA3BDA /* Main.storyboard */; };
+		65A050C1261BF13400DA3BDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65A050C0261BF13400DA3BDA /* Assets.xcassets */; };
+		65A050C4261BF13400DA3BDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65A050C2261BF13400DA3BDA /* LaunchScreen.storyboard */; };
+		65A050C7261BF13400DA3BDA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A050C6261BF13400DA3BDA /* main.m */; };
+		65A050D1261BF13400DA3BDA /* ERModuleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A050D0261BF13400DA3BDA /* ERModuleTests.m */; };
+		65A050DC261BF13400DA3BDA /* ERModuleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A050DB261BF13400DA3BDA /* ERModuleUITests.m */; };
+		AEC2766633CE8989A07D6732 /* Pods_ERModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF0B49191E5BD16F8045F1A3 /* Pods_ERModule.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		65A050CD261BF13400DA3BDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65A050A9261BF13300DA3BDA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65A050B0261BF13300DA3BDA;
+			remoteInfo = ERModule;
+		};
+		65A050D8261BF13400DA3BDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65A050A9261BF13300DA3BDA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65A050B0261BF13300DA3BDA;
+			remoteInfo = ERModule;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		30A057EB671F1D158621B246 /* Pods-ERModule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ERModule.debug.xcconfig"; path = "Target Support Files/Pods-ERModule/Pods-ERModule.debug.xcconfig"; sourceTree = "<group>"; };
+		3E3083E110031B1234009600 /* Pods-ERModule.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ERModule.release.xcconfig"; path = "Target Support Files/Pods-ERModule/Pods-ERModule.release.xcconfig"; sourceTree = "<group>"; };
+		650176CF261D804000B97844 /* UIBatteryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBatteryView.h; sourceTree = "<group>"; };
+		650176D0261D804000B97844 /* UIBatteryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBatteryView.m; sourceTree = "<group>"; };
+		650176EE261E95D400B97844 /* JKDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBModel.m; sourceTree = "<group>"; };
+		650176EF261E95D400B97844 /* JKDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBHelper.m; sourceTree = "<group>"; };
+		650176F0261E95D400B97844 /* JKDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBModel.h; sourceTree = "<group>"; };
+		650176F1261E95D400B97844 /* JKDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBHelper.h; sourceTree = "<group>"; };
+		650176FB261EA91C00B97844 /* VTMBLEStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMBLEStruct.h; sourceTree = "<group>"; };
+		650176FC261EA91C00B97844 /* VTMCalibrate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMCalibrate.m; sourceTree = "<group>"; };
+		650176FD261EA91C00B97844 /* VTMBLEParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMBLEParser.h; sourceTree = "<group>"; };
+		65017709261EA91C00B97844 /* VTMBLEParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMBLEParser.m; sourceTree = "<group>"; };
+		6501770A261EA91C00B97844 /* VTMBLEEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMBLEEnum.h; sourceTree = "<group>"; };
+		6501770B261EA91C00B97844 /* VTMCalibrate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMCalibrate.h; sourceTree = "<group>"; };
+		6501770D261EA91C00B97844 /* VTMBLESend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMBLESend.h; sourceTree = "<group>"; };
+		6501770E261EA91C00B97844 /* VTMURATUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMURATUtils.h; sourceTree = "<group>"; };
+		6501770F261EA91C00B97844 /* VTMBLEReceive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTMBLEReceive.h; sourceTree = "<group>"; };
+		65017710261EA91C00B97844 /* VTMBLESend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMBLESend.m; sourceTree = "<group>"; };
+		65017711261EA91C00B97844 /* VTMBLEReceive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMBLEReceive.m; sourceTree = "<group>"; };
+		65017712261EA91C00B97844 /* VTMURATUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTMURATUtils.m; sourceTree = "<group>"; };
+		6501773A261FE4EF00B97844 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6501779E2620434000B97844 /* ERRecordECG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ERRecordECG.h; sourceTree = "<group>"; };
+		6501779F2620434000B97844 /* ERRecordECG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ERRecordECG.m; sourceTree = "<group>"; };
+		650177A42620435C00B97844 /* ERDeviceInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ERDeviceInfo.h; sourceTree = "<group>"; };
+		650177A52620435C00B97844 /* ERDeviceInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ERDeviceInfo.m; sourceTree = "<group>"; };
+		650177E12620519100B97844 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		650177E22620519100B97844 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		655C097B261C3AC0001A45C7 /* VTDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTDevice.h; sourceTree = "<group>"; };
+		655C097C261C3AC0001A45C7 /* VTBLEUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTBLEUtils.m; sourceTree = "<group>"; };
+		655C097D261C3AC0001A45C7 /* VTBLEUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTBLEUtils.h; sourceTree = "<group>"; };
+		655C097E261C3AC0001A45C7 /* VTDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTDevice.m; sourceTree = "<group>"; };
+		655C099F261C408C001A45C7 /* VTER1Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTER1Utils.h; sourceTree = "<group>"; };
+		655C09A0261C408C001A45C7 /* VTER1Utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VTER1Utils.mm; sourceTree = "<group>"; };
+		655C09BB261C4936001A45C7 /* VTER1RealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTER1RealViewController.h; sourceTree = "<group>"; };
+		655C09BC261C4936001A45C7 /* VTER1RealViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTER1RealViewController.m; sourceTree = "<group>"; };
+		655C09D2261C50E8001A45C7 /* VTCustomText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTCustomText.h; sourceTree = "<group>"; };
+		655C09D3261C50E8001A45C7 /* VTCustomText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTCustomText.m; sourceTree = "<group>"; };
+		655C09EC261C769C001A45C7 /* VTMarco.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTMarco.h; sourceTree = "<group>"; };
+		655C09F0261C79FC001A45C7 /* VTER1RealView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTER1RealView.h; sourceTree = "<group>"; };
+		655C09F1261C79FC001A45C7 /* VTER1RealView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTER1RealView.m; sourceTree = "<group>"; };
+		655C09F6261C7ABA001A45C7 /* VTStartUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTStartUtils.h; sourceTree = "<group>"; };
+		655C09F7261C7ABA001A45C7 /* VTStartUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTStartUtils.m; sourceTree = "<group>"; };
+		655C09FC261C828C001A45C7 /* VTNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTNavigationViewController.h; sourceTree = "<group>"; };
+		655C09FD261C828C001A45C7 /* VTNavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTNavigationViewController.m; sourceTree = "<group>"; };
+		655C0A02261C86BB001A45C7 /* ER1RealView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ER1RealView.xib; sourceTree = "<group>"; };
+		6582D782262430F900822397 /* ERFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ERFileManager.h; sourceTree = "<group>"; };
+		6582D783262430F900822397 /* ERFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ERFileManager.m; sourceTree = "<group>"; };
+		6582D79126243B8C00822397 /* ERSyncManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ERSyncManager.h; sourceTree = "<group>"; };
+		6582D79226243B8C00822397 /* ERSyncManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ERSyncManager.m; sourceTree = "<group>"; };
+		6582D7A1262460BD00822397 /* VTER1HistoryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTER1HistoryCell.h; sourceTree = "<group>"; };
+		6582D7A2262460BD00822397 /* VTER1HistoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTER1HistoryCell.m; sourceTree = "<group>"; };
+		6582D7A3262460BD00822397 /* VTER1HistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VTER1HistoryCell.xib; sourceTree = "<group>"; };
+		6582D7CC26253BC300822397 /* VTER1HistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTER1HistoryViewController.h; sourceTree = "<group>"; };
+		6582D7CD26253BC300822397 /* VTER1HistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTER1HistoryViewController.m; sourceTree = "<group>"; };
+		6582D7CE26253BC300822397 /* VTER1HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VTER1HistoryViewController.xib; sourceTree = "<group>"; };
+		6582D7D42625780200822397 /* ECGReportInfoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECGReportInfoData.m; sourceTree = "<group>"; };
+		6582D7D52625780200822397 /* ECGReportInfoData.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECGReportInfoData.xib; sourceTree = "<group>"; };
+		6582D7D62625780200822397 /* ECGReportInfoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECGReportInfoData.h; sourceTree = "<group>"; };
+		6582D7DC262578CE00822397 /* VTERUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTERUser.h; sourceTree = "<group>"; };
+		6582D7DD262578CE00822397 /* VTERUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTERUser.m; sourceTree = "<group>"; };
+		6582D7E22625797700822397 /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Extensions.h"; path = "ERModule/ECGModule/Utils/UIColor+Extensions.h"; sourceTree = SOURCE_ROOT; };
+		6582D7E42625797700822397 /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Extensions.m"; path = "ERModule/ECGModule/Utils/UIColor+Extensions.m"; sourceTree = SOURCE_ROOT; };
+		6582D7EC262587DC00822397 /* ViaReportWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViaReportWave.h; sourceTree = "<group>"; };
+		6582D7ED262587DC00822397 /* ViaReportWave.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViaReportWave.m; sourceTree = "<group>"; };
+		6582D7F226258B1000822397 /* ERECGReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ERECGReport.m; sourceTree = "<group>"; };
+		6582D7F326258B1000822397 /* ERECGReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ERECGReport.h; sourceTree = "<group>"; };
+		6582D7F826258D0700822397 /* UIView+Additional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Additional.m"; path = "ERModule/ECGModule/Utils/UIView+Additional.m"; sourceTree = SOURCE_ROOT; };
+		6582D7F926258D0700822397 /* UIView+Additional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Additional.h"; path = "ERModule/ECGModule/Utils/UIView+Additional.h"; sourceTree = SOURCE_ROOT; };
+		6582D80126258E1800822397 /* ViaPDFManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViaPDFManager.h; sourceTree = "<group>"; };
+		6582D80226258E1800822397 /* ViaPDFManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViaPDFManager.m; sourceTree = "<group>"; };
+		6582D81E26259E2700822397 /* ERPdfReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ERPdfReportViewController.h; sourceTree = "<group>"; };
+		6582D81F26259E2700822397 /* ERPdfReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ERPdfReportViewController.m; sourceTree = "<group>"; };
+		6582D82426259EBB00822397 /* QLPdfPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLPdfPreviewItem.h; sourceTree = "<group>"; };
+		6582D82526259EBB00822397 /* QLPdfPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLPdfPreviewItem.m; sourceTree = "<group>"; };
+		6582D8342626794300822397 /* VTScanDashboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTScanDashboard.h; sourceTree = "<group>"; };
+		6582D8352626794300822397 /* VTScanDashboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTScanDashboard.m; sourceTree = "<group>"; };
+		6582D83726267D9000822397 /* VTScanDashboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VTScanDashboard.xib; sourceTree = "<group>"; };
+		65A050B1261BF13300DA3BDA /* ERModule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ERModule.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65A050B4261BF13300DA3BDA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		65A050B5261BF13300DA3BDA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		65A050BA261BF13300DA3BDA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		65A050BB261BF13300DA3BDA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		65A050BE261BF13300DA3BDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		65A050C0261BF13400DA3BDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		65A050C3261BF13400DA3BDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		65A050C5261BF13400DA3BDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65A050C6261BF13400DA3BDA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		65A050CC261BF13400DA3BDA /* ERModuleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ERModuleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65A050D0261BF13400DA3BDA /* ERModuleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ERModuleTests.m; sourceTree = "<group>"; };
+		65A050D2261BF13400DA3BDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65A050D7261BF13400DA3BDA /* ERModuleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ERModuleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65A050DB261BF13400DA3BDA /* ERModuleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ERModuleUITests.m; sourceTree = "<group>"; };
+		65A050DD261BF13400DA3BDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF0B49191E5BD16F8045F1A3 /* Pods_ERModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ERModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		65A050AE261BF13300DA3BDA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6501773B261FE4EF00B97844 /* CoreData.framework in Frameworks */,
+				AEC2766633CE8989A07D6732 /* Pods_ERModule.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65A050C9261BF13400DA3BDA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65A050D4261BF13400DA3BDA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		650176EC261E959200B97844 /* Third */ = {
+			isa = PBXGroup;
+			children = (
+				650177E02620519100B97844 /* MBProgressHUD */,
+				650176ED261E95D400B97844 /* DBModel */,
+			);
+			path = Third;
+			sourceTree = "<group>";
+		};
+		650176ED261E95D400B97844 /* DBModel */ = {
+			isa = PBXGroup;
+			children = (
+				650176F1261E95D400B97844 /* JKDBHelper.h */,
+				650176EF261E95D400B97844 /* JKDBHelper.m */,
+				650176F0261E95D400B97844 /* JKDBModel.h */,
+				650176EE261E95D400B97844 /* JKDBModel.m */,
+			);
+			path = DBModel;
+			sourceTree = "<group>";
+		};
+		650176FA261EA91C00B97844 /* VTMProductSDK */ = {
+			isa = PBXGroup;
+			children = (
+				6501770C261EA91C00B97844 /* Communication */,
+				6501770A261EA91C00B97844 /* VTMBLEEnum.h */,
+				650176FD261EA91C00B97844 /* VTMBLEParser.h */,
+				65017709261EA91C00B97844 /* VTMBLEParser.m */,
+				650176FB261EA91C00B97844 /* VTMBLEStruct.h */,
+				6501770B261EA91C00B97844 /* VTMCalibrate.h */,
+				650176FC261EA91C00B97844 /* VTMCalibrate.m */,
+			);
+			path = VTMProductSDK;
+			sourceTree = "<group>";
+		};
+		6501770C261EA91C00B97844 /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				6501770F261EA91C00B97844 /* VTMBLEReceive.h */,
+				65017711261EA91C00B97844 /* VTMBLEReceive.m */,
+				6501770D261EA91C00B97844 /* VTMBLESend.h */,
+				65017710261EA91C00B97844 /* VTMBLESend.m */,
+				6501770E261EA91C00B97844 /* VTMURATUtils.h */,
+				65017712261EA91C00B97844 /* VTMURATUtils.m */,
+			);
+			path = Communication;
+			sourceTree = "<group>";
+		};
+		650177E02620519100B97844 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				650177E22620519100B97844 /* MBProgressHUD.h */,
+				650177E12620519100B97844 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		655C0984261C3B43001A45C7 /* CommunicateSDK */ = {
+			isa = PBXGroup;
+			children = (
+				655C099F261C408C001A45C7 /* VTER1Utils.h */,
+				655C09A0261C408C001A45C7 /* VTER1Utils.mm */,
+				650176FA261EA91C00B97844 /* VTMProductSDK */,
+			);
+			path = CommunicateSDK;
+			sourceTree = "<group>";
+		};
+		655C09BA261C4916001A45C7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				655C09FC261C828C001A45C7 /* VTNavigationViewController.h */,
+				655C09FD261C828C001A45C7 /* VTNavigationViewController.m */,
+				655C09BB261C4936001A45C7 /* VTER1RealViewController.h */,
+				655C09BC261C4936001A45C7 /* VTER1RealViewController.m */,
+				6582D7CC26253BC300822397 /* VTER1HistoryViewController.h */,
+				6582D7CD26253BC300822397 /* VTER1HistoryViewController.m */,
+				6582D7CE26253BC300822397 /* VTER1HistoryViewController.xib */,
+				6582D81E26259E2700822397 /* ERPdfReportViewController.h */,
+				6582D81F26259E2700822397 /* ERPdfReportViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		655C09C1261C49E6001A45C7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				650176CF261D804000B97844 /* UIBatteryView.h */,
+				650176D0261D804000B97844 /* UIBatteryView.m */,
+				655C09F0261C79FC001A45C7 /* VTER1RealView.h */,
+				655C09F1261C79FC001A45C7 /* VTER1RealView.m */,
+				655C0A02261C86BB001A45C7 /* ER1RealView.xib */,
+				6582D7A1262460BD00822397 /* VTER1HistoryCell.h */,
+				6582D7A2262460BD00822397 /* VTER1HistoryCell.m */,
+				6582D7A3262460BD00822397 /* VTER1HistoryCell.xib */,
+				6582D7D62625780200822397 /* ECGReportInfoData.h */,
+				6582D7D42625780200822397 /* ECGReportInfoData.m */,
+				6582D7D52625780200822397 /* ECGReportInfoData.xib */,
+				6582D7EC262587DC00822397 /* ViaReportWave.h */,
+				6582D7ED262587DC00822397 /* ViaReportWave.m */,
+				6582D7F326258B1000822397 /* ERECGReport.h */,
+				6582D7F226258B1000822397 /* ERECGReport.m */,
+				6582D8342626794300822397 /* VTScanDashboard.h */,
+				6582D8352626794300822397 /* VTScanDashboard.m */,
+				6582D83726267D9000822397 /* VTScanDashboard.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		655C09C2261C49EB001A45C7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				655C09D2261C50E8001A45C7 /* VTCustomText.h */,
+				655C09D3261C50E8001A45C7 /* VTCustomText.m */,
+				6501779E2620434000B97844 /* ERRecordECG.h */,
+				6501779F2620434000B97844 /* ERRecordECG.m */,
+				650177A42620435C00B97844 /* ERDeviceInfo.h */,
+				650177A52620435C00B97844 /* ERDeviceInfo.m */,
+				6582D7DC262578CE00822397 /* VTERUser.h */,
+				6582D7DD262578CE00822397 /* VTERUser.m */,
+				6582D82426259EBB00822397 /* QLPdfPreviewItem.h */,
+				6582D82526259EBB00822397 /* QLPdfPreviewItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		655C09EA261C7663001A45C7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				655C09EC261C769C001A45C7 /* VTMarco.h */,
+				655C09F6261C7ABA001A45C7 /* VTStartUtils.h */,
+				655C09F7261C7ABA001A45C7 /* VTStartUtils.m */,
+				6582D782262430F900822397 /* ERFileManager.h */,
+				6582D783262430F900822397 /* ERFileManager.m */,
+				6582D79126243B8C00822397 /* ERSyncManager.h */,
+				6582D79226243B8C00822397 /* ERSyncManager.m */,
+				6582D80126258E1800822397 /* ViaPDFManager.h */,
+				6582D80226258E1800822397 /* ViaPDFManager.m */,
+				6582D7F926258D0700822397 /* UIView+Additional.h */,
+				6582D7F826258D0700822397 /* UIView+Additional.m */,
+				6582D7E22625797700822397 /* UIColor+Extensions.h */,
+				6582D7E42625797700822397 /* UIColor+Extensions.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		65A050A8261BF13300DA3BDA = {
+			isa = PBXGroup;
+			children = (
+				65A050B3261BF13300DA3BDA /* ERModule */,
+				65A050CF261BF13400DA3BDA /* ERModuleTests */,
+				65A050DA261BF13400DA3BDA /* ERModuleUITests */,
+				65A050B2261BF13300DA3BDA /* Products */,
+				6FE1342B14D7A8D35BD816FB /* Pods */,
+				DB9C90E3869C1E351D4114DD /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		65A050B2261BF13300DA3BDA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				65A050B1261BF13300DA3BDA /* ERModule.app */,
+				65A050CC261BF13400DA3BDA /* ERModuleTests.xctest */,
+				65A050D7261BF13400DA3BDA /* ERModuleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		65A050B3261BF13300DA3BDA /* ERModule */ = {
+			isa = PBXGroup;
+			children = (
+				65A050B4261BF13300DA3BDA /* AppDelegate.h */,
+				65A050B5261BF13300DA3BDA /* AppDelegate.m */,
+				65A050BA261BF13300DA3BDA /* ViewController.h */,
+				65A050BB261BF13300DA3BDA /* ViewController.m */,
+				65A050EF261BF60A00DA3BDA /* ECGModule */,
+				65A050BD261BF13300DA3BDA /* Main.storyboard */,
+				65A050C0261BF13400DA3BDA /* Assets.xcassets */,
+				65A050C2261BF13400DA3BDA /* LaunchScreen.storyboard */,
+				65A050C5261BF13400DA3BDA /* Info.plist */,
+				65A050C6261BF13400DA3BDA /* main.m */,
+			);
+			path = ERModule;
+			sourceTree = "<group>";
+		};
+		65A050CF261BF13400DA3BDA /* ERModuleTests */ = {
+			isa = PBXGroup;
+			children = (
+				65A050D0261BF13400DA3BDA /* ERModuleTests.m */,
+				65A050D2261BF13400DA3BDA /* Info.plist */,
+			);
+			path = ERModuleTests;
+			sourceTree = "<group>";
+		};
+		65A050DA261BF13400DA3BDA /* ERModuleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				65A050DB261BF13400DA3BDA /* ERModuleUITests.m */,
+				65A050DD261BF13400DA3BDA /* Info.plist */,
+			);
+			path = ERModuleUITests;
+			sourceTree = "<group>";
+		};
+		65A050EF261BF60A00DA3BDA /* ECGModule */ = {
+			isa = PBXGroup;
+			children = (
+				650176EC261E959200B97844 /* Third */,
+				655C09EA261C7663001A45C7 /* Utils */,
+				655C09C2261C49EB001A45C7 /* Model */,
+				655C09C1261C49E6001A45C7 /* View */,
+				655C09BA261C4916001A45C7 /* Controller */,
+				655C0984261C3B43001A45C7 /* CommunicateSDK */,
+				65A050F1261BF6A300DA3BDA /* BLE */,
+			);
+			path = ECGModule;
+			sourceTree = "<group>";
+		};
+		65A050F1261BF6A300DA3BDA /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				655C097D261C3AC0001A45C7 /* VTBLEUtils.h */,
+				655C097C261C3AC0001A45C7 /* VTBLEUtils.m */,
+				655C097B261C3AC0001A45C7 /* VTDevice.h */,
+				655C097E261C3AC0001A45C7 /* VTDevice.m */,
+			);
+			path = BLE;
+			sourceTree = "<group>";
+		};
+		6FE1342B14D7A8D35BD816FB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				30A057EB671F1D158621B246 /* Pods-ERModule.debug.xcconfig */,
+				3E3083E110031B1234009600 /* Pods-ERModule.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DB9C90E3869C1E351D4114DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6501773A261FE4EF00B97844 /* CoreData.framework */,
+				DF0B49191E5BD16F8045F1A3 /* Pods_ERModule.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		65A050B0261BF13300DA3BDA /* ERModule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65A050E0261BF13400DA3BDA /* Build configuration list for PBXNativeTarget "ERModule" */;
+			buildPhases = (
+				B9C4093E2A433A6956DFAF3D /* [CP] Check Pods Manifest.lock */,
+				65A050AD261BF13300DA3BDA /* Sources */,
+				65A050AE261BF13300DA3BDA /* Frameworks */,
+				65A050AF261BF13300DA3BDA /* Resources */,
+				1B3EC8CCF2D2D0DC40B6A258 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ERModule;
+			productName = ERModule;
+			productReference = 65A050B1261BF13300DA3BDA /* ERModule.app */;
+			productType = "com.apple.product-type.application";
+		};
+		65A050CB261BF13400DA3BDA /* ERModuleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65A050E3261BF13400DA3BDA /* Build configuration list for PBXNativeTarget "ERModuleTests" */;
+			buildPhases = (
+				65A050C8261BF13400DA3BDA /* Sources */,
+				65A050C9261BF13400DA3BDA /* Frameworks */,
+				65A050CA261BF13400DA3BDA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				65A050CE261BF13400DA3BDA /* PBXTargetDependency */,
+			);
+			name = ERModuleTests;
+			productName = ERModuleTests;
+			productReference = 65A050CC261BF13400DA3BDA /* ERModuleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		65A050D6261BF13400DA3BDA /* ERModuleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65A050E6261BF13400DA3BDA /* Build configuration list for PBXNativeTarget "ERModuleUITests" */;
+			buildPhases = (
+				65A050D3261BF13400DA3BDA /* Sources */,
+				65A050D4261BF13400DA3BDA /* Frameworks */,
+				65A050D5261BF13400DA3BDA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				65A050D9261BF13400DA3BDA /* PBXTargetDependency */,
+			);
+			name = ERModuleUITests;
+			productName = ERModuleUITests;
+			productReference = 65A050D7261BF13400DA3BDA /* ERModuleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		65A050A9261BF13300DA3BDA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					65A050B0261BF13300DA3BDA = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					65A050CB261BF13400DA3BDA = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 65A050B0261BF13300DA3BDA;
+					};
+					65A050D6261BF13400DA3BDA = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 65A050B0261BF13300DA3BDA;
+					};
+				};
+			};
+			buildConfigurationList = 65A050AC261BF13300DA3BDA /* Build configuration list for PBXProject "ERModule" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 65A050A8261BF13300DA3BDA;
+			productRefGroup = 65A050B2261BF13300DA3BDA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				65A050B0261BF13300DA3BDA /* ERModule */,
+				65A050CB261BF13400DA3BDA /* ERModuleTests */,
+				65A050D6261BF13400DA3BDA /* ERModuleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		65A050AF261BF13300DA3BDA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				655C0A03261C86BB001A45C7 /* ER1RealView.xib in Resources */,
+				6582D7D82625780200822397 /* ECGReportInfoData.xib in Resources */,
+				6582D7A5262460BD00822397 /* VTER1HistoryCell.xib in Resources */,
+				6582D83826267D9000822397 /* VTScanDashboard.xib in Resources */,
+				65A050C4261BF13400DA3BDA /* LaunchScreen.storyboard in Resources */,
+				65A050C1261BF13400DA3BDA /* Assets.xcassets in Resources */,
+				6582D7D026253BC300822397 /* VTER1HistoryViewController.xib in Resources */,
+				65A050BF261BF13300DA3BDA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65A050CA261BF13400DA3BDA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65A050D5261BF13400DA3BDA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B3EC8CCF2D2D0DC40B6A258 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ERModule/Pods-ERModule-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ERModule/Pods-ERModule-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ERModule/Pods-ERModule-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B9C4093E2A433A6956DFAF3D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ERModule-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		65A050AD261BF13300DA3BDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				655C09FE261C828C001A45C7 /* VTNavigationViewController.m in Sources */,
+				6582D8362626794300822397 /* VTScanDashboard.m in Sources */,
+				65A050BC261BF13300DA3BDA /* ViewController.m in Sources */,
+				650176F3261E95D400B97844 /* JKDBHelper.m in Sources */,
+				650176F2261E95D400B97844 /* JKDBModel.m in Sources */,
+				650177E32620519100B97844 /* MBProgressHUD.m in Sources */,
+				655C09F2261C79FC001A45C7 /* VTER1RealView.m in Sources */,
+				655C09F8261C7ABA001A45C7 /* VTStartUtils.m in Sources */,
+				655C09D4261C50E8001A45C7 /* VTCustomText.m in Sources */,
+				650177A62620435C00B97844 /* ERDeviceInfo.m in Sources */,
+				6582D7DE262578CE00822397 /* VTERUser.m in Sources */,
+				6582D82026259E2700822397 /* ERPdfReportViewController.m in Sources */,
+				6582D7FA26258D0700822397 /* UIView+Additional.m in Sources */,
+				6582D80326258E1800822397 /* ViaPDFManager.m in Sources */,
+				6501771C261EA91C00B97844 /* VTMURATUtils.m in Sources */,
+				6582D7E52625797700822397 /* UIColor+Extensions.m in Sources */,
+				6582D784262430F900822397 /* ERFileManager.m in Sources */,
+				655C09BD261C4936001A45C7 /* VTER1RealViewController.m in Sources */,
+				655C0980261C3AC0001A45C7 /* VTDevice.m in Sources */,
+				6582D7CF26253BC300822397 /* VTER1HistoryViewController.m in Sources */,
+				6582D7F426258B1000822397 /* ERECGReport.m in Sources */,
+				6582D7EE262587DC00822397 /* ViaReportWave.m in Sources */,
+				65A050B6261BF13300DA3BDA /* AppDelegate.m in Sources */,
+				655C09A1261C408C001A45C7 /* VTER1Utils.mm in Sources */,
+				65017713261EA91C00B97844 /* VTMCalibrate.m in Sources */,
+				65017719261EA91C00B97844 /* VTMBLEParser.m in Sources */,
+				6582D82626259EBB00822397 /* QLPdfPreviewItem.m in Sources */,
+				650176D1261D804000B97844 /* UIBatteryView.m in Sources */,
+				6582D7A4262460BD00822397 /* VTER1HistoryCell.m in Sources */,
+				650177A02620434000B97844 /* ERRecordECG.m in Sources */,
+				6501771A261EA91C00B97844 /* VTMBLESend.m in Sources */,
+				6582D79326243B8C00822397 /* ERSyncManager.m in Sources */,
+				65A050C7261BF13400DA3BDA /* main.m in Sources */,
+				6501771B261EA91C00B97844 /* VTMBLEReceive.m in Sources */,
+				655C097F261C3AC0001A45C7 /* VTBLEUtils.m in Sources */,
+				6582D7D72625780200822397 /* ECGReportInfoData.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65A050C8261BF13400DA3BDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65A050D1261BF13400DA3BDA /* ERModuleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65A050D3261BF13400DA3BDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65A050DC261BF13400DA3BDA /* ERModuleUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		65A050CE261BF13400DA3BDA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65A050B0261BF13300DA3BDA /* ERModule */;
+			targetProxy = 65A050CD261BF13400DA3BDA /* PBXContainerItemProxy */;
+		};
+		65A050D9261BF13400DA3BDA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65A050B0261BF13300DA3BDA /* ERModule */;
+			targetProxy = 65A050D8261BF13400DA3BDA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		65A050BD261BF13300DA3BDA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65A050BE261BF13300DA3BDA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		65A050C2261BF13400DA3BDA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65A050C3261BF13400DA3BDA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		65A050DE261BF13400DA3BDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		65A050DF261BF13400DA3BDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		65A050E1261BF13400DA3BDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30A057EB671F1D158621B246 /* Pods-ERModule.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 84Z5TBSNUY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ERModule/ECGModule/CommunicateSDK",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = ERModule/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viatom.ERModule;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		65A050E2261BF13400DA3BDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E3083E110031B1234009600 /* Pods-ERModule.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 84Z5TBSNUY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ERModule/ECGModule/CommunicateSDK",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = ERModule/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.viatom.ERModule;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		65A050E4261BF13400DA3BDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 84Z5TBSNUY;
+				INFOPLIST_FILE = ERModuleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.viatom.ERModuleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ERModule.app/ERModule";
+			};
+			name = Debug;
+		};
+		65A050E5261BF13400DA3BDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 84Z5TBSNUY;
+				INFOPLIST_FILE = ERModuleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.viatom.ERModuleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ERModule.app/ERModule";
+			};
+			name = Release;
+		};
+		65A050E7261BF13400DA3BDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 84Z5TBSNUY;
+				INFOPLIST_FILE = ERModuleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.viatom.ERModuleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ERModule;
+			};
+			name = Debug;
+		};
+		65A050E8261BF13400DA3BDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 84Z5TBSNUY;
+				INFOPLIST_FILE = ERModuleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.viatom.ERModuleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ERModule;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		65A050AC261BF13300DA3BDA /* Build configuration list for PBXProject "ERModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65A050DE261BF13400DA3BDA /* Debug */,
+				65A050DF261BF13400DA3BDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65A050E0261BF13400DA3BDA /* Build configuration list for PBXNativeTarget "ERModule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65A050E1261BF13400DA3BDA /* Debug */,
+				65A050E2261BF13400DA3BDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65A050E3261BF13400DA3BDA /* Build configuration list for PBXNativeTarget "ERModuleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65A050E4261BF13400DA3BDA /* Debug */,
+				65A050E5261BF13400DA3BDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65A050E6261BF13400DA3BDA /* Build configuration list for PBXNativeTarget "ERModuleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65A050E7261BF13400DA3BDA /* Debug */,
+				65A050E8261BF13400DA3BDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 65A050A9261BF13300DA3BDA /* Project object */;
+}
