@@ -297,6 +297,10 @@
 }
 
 - (void)scanCompletion{
+    if (_deviceListArray.count == 0) {
+        [self showWarningAndErrorString:@"未发现可用的设备"];
+        return;
+    }
     [_deviceListArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         return ABS(([[(VTDevice *)obj1 RSSI] intValue])) > ABS([[(VTDevice *)obj2 RSSI] intValue]);
     }];
