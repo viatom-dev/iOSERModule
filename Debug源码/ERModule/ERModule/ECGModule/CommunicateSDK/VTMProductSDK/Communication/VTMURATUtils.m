@@ -180,7 +180,6 @@ typedef enum : NSUInteger {
     Byte *buf = (Byte *)_dataPool.bytes;
     NSInteger len = _dataPool.length;
     if (buf[0] != 0xA5) {
-//        VTMLog(@"Response header error.");
         int i = 1;
         for (; i < len; i ++) {
             if (buf[i] == 0xA5) { // 取到下一个正确的A5位置
@@ -188,7 +187,7 @@ typedef enum : NSUInteger {
             }
         }
         // 清空下一个包头之前的错误数据
-        [_dataPool replaceBytesInRange:NSMakeRange(0, i - 1) withBytes:NULL length:0];
+        [_dataPool replaceBytesInRange:NSMakeRange(0, i) withBytes:NULL length:0];
         return;
     }else if (len < 7) {
         return;
@@ -269,6 +268,8 @@ typedef enum : NSUInteger {
     _txcharacteristic = nil;
     _notifyHRCharacteristic = nil;
     _peripheral.delegate = self;
+    _dataPool = nil;
+    _dataPool = [NSMutableData dataWithCapacity:10];
     [_peripheral discoverServices:@[kVTMUartServiceUUID, kVTMDevServiceUUID, kVTMDeviceInformationServiceUUID,kVTMHeartRateServiceUUID]];
 }
 

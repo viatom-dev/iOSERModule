@@ -309,7 +309,7 @@
 }
 
 - (void)didConnectedDevice:(VTDevice *)device{
-    NSLog(@"%s<line:%d>:设备连接成功",__func__,__LINE__);
+    NSLog(@"%s<line:%d>:(%@)连接成功",__func__,__LINE__,device.advName);
     [self hiddenWarningAndErrorAnimation];
     [self showWarningAndErrorString:@"连接成功，获取数据"];
     CBPeripheral *rawPeripheral = device.rawPeripheral;
@@ -320,6 +320,7 @@
 }
 
 - (void)didDisconnectedDevice:(VTDevice *)device andError:(NSError *)error{
+    NSLog(@"%s<line:%d>:(%@)已断开连接",__func__,__LINE__,device.advName);
     [self stopTimer];
     if (error) {
         [[VTBLEUtils sharedInstance] connectToDevices:@[device]];
@@ -329,6 +330,7 @@
 #pragma mark --- vtm device delegate
 
 - (void)utilDeployCompletion:(VTMURATUtils *)util{
+    NSLog(@"%s<line:%d>:(%@)服务配置完成",__func__,__LINE__,util.peripheral.name);
     [self startTimer];
 }
 

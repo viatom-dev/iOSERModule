@@ -271,10 +271,12 @@ static float spacing = 2.0;
 }
 #pragma mark - 关闭定时器
 - (void)closeTime {
-    dispatch_source_cancel(_timer);
-    dispatch_source_set_cancel_handler(_timer, ^{
-        self->_timer = nil;
-    });
+    if (_timer) {
+        dispatch_source_cancel(_timer);
+        dispatch_source_set_cancel_handler(_timer, ^{
+            self->_timer = nil;
+        });
+    }
 }
 
 #pragma mark - 懒加载
