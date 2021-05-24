@@ -9,13 +9,25 @@
 #import "ERFileManager.h"
 #import <AFNetworking.h>
 
+
+/// 上线更新为正式服务器
+#if 0
+
+#define AIECGAnalysisURL @"https://lepucare.viatomtech.com.cn/huawei_ecg_analysis"
+
+#else
+
+#define AIECGAnalysisURL @"https://ai.viatomtech.com.cn/huawei_ecg_analysis"
+
+#endif
+
 @implementation ERSyncManager
 
 +(void)syncRecordEcg:(NSString *)recordFileUrl finished:(SyncEcgFileCallBack)callback{
     NSString *fileName = recordFileUrl.lastPathComponent;
     NSString *fileFold = [recordFileUrl componentsSeparatedByString:@"/"].firstObject;
     NSData *data = [ERFileManager readFile:fileName inDirectory:fileFold];
-    NSString *urlString = @"https://ai.viatomtech.com.cn/huawei_ecg_analysis";
+    NSString *urlString = AIECGAnalysisURL;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer.timeoutInterval = 300.0f;
     
