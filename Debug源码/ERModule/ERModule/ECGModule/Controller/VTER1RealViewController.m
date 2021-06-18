@@ -5,6 +5,7 @@
 //  Created by yangweichao on 2021/4/6.
 //
 
+#import <Masonry/Masonry.h>
 #import "VTER1RealViewController.h"
 #import "VTER1HistoryViewController.h"
 #import "VTER1RealView.h"
@@ -19,6 +20,12 @@
 #import "VTScanDashboard.h"
 #import "AppDelegate.h"
 #import "VTMarco.h"
+#import "ECGReportInfoData.h"
+#import "ViaReportWave.h"
+#import "ViaPDFManager.h"
+#import "ERECGReport.h"
+#import "UIColor+Extensions.h"
+#import "UIView+Additional.h"
 
 @interface VTER1RealViewController ()<VTBLEUtilsDelegate, VTMURATDeviceDelegate, VTMURATUtilsDelegate, UIGestureRecognizerDelegate, VTScanDashboardDelegate>
 
@@ -163,11 +170,11 @@
             NSData *txtData = [originalTxt dataUsingEncoding:NSUTF8StringEncoding];
             [ERFileManager saveFile:[weakSelf.recordECG.startTime stringByAppendingString:@".txt"] FileData:txtData withDirectoryName:@"VTER1FileFold"];
             [weakSelf.recordECG save];
-            if (!weakSelf.recordECG.manaul) {
+//            if (!weakSelf.recordECG.manaul) {
                 [weakSelf autoAiAnalysis:weakSelf.recordECG];
-            }else{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": weakSelf.recordECG}];
-            }
+//            }else{
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": weakSelf.recordECG}];
+//            }
         }
     };
 }
@@ -264,8 +271,10 @@
             [recordECG setAiResult:[response objectForKey:@"aiResult"]];
             [recordECG setAiDiagnosis:[response objectForKey:@"aiDiagnosis"]];
             [recordECG update];
+            [self productAIReportWithEcg:recordECG];
+        }else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": recordECG}];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": recordECG}];
     }];
 }
 
@@ -373,6 +382,139 @@
 
 - (void)receiveHeartRateByStandardService:(Byte)hrByte{
     
+}
+
+#pragma mark --- 生成报告
+
+- (NSString *)generateERAIReportFile:(ERRecordECG *)ecg{
+    NSMutableArray *subViews = [NSMutableArray arrayWithCapacity:8];
+    
+    // 创建患者信息卡片
+    ECGReportInfoData *userInfo = [[NSBundle mainBundle] loadNibNamed:@"ECGReportInfoData" owner:self options:nil].lastObject;
+    userInfo.bounds = CGRectMake(0, 0, 0, 140);
+    userInfo.member = [VTCustomText sharedInstance].user;
+    userInfo.ecgRecord = ecg;
+    [subViews addObject:userInfo];
+    
+    NSDictionary *dic = [ecg dataDicFromData];
+    // 创建AI分析建议
+    NSArray *aiResultList = [dic objectForKey:@"aiResultList"];
+    for (int i=0; i < aiResultList.count; i++) {
+        NSDictionary * tmpDic = aiResultList[i];
+        NSString * tmp = tmpDic[@"phoneContent"];
+        NSString * phoneText =[tmp stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+        NSString *sugStr = [NSString stringWithFormat:@"%@\n%@",tmpDic[@"aiDiagnosis"],phoneText];
+        UILabel *sugLab = [[UILabel alloc] init];
+        sugLab.font = [UIFont systemFontOfSize:11];
+        sugLab.text = sugStr;
+        sugLab.textColor = [UIColor colorWithHex:000000];
+        sugLab.numberOfLines = 0;
+        sugLab.layer.borderWidth = 1;
+        sugLab.layer.borderColor = [UIColor blackColor].CGColor;
+        CGRect r = [sugStr boundingRectWithSize:CGSizeMake(wave_width, CGFLOAT_MAX)
+                                           options:NSStringDrawingUsesLineFragmentOrigin
+                                        attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]}
+                                           context:nil];
+        sugLab.bounds = CGRectMake(0, 0, r.size.width, r.size.height + 14);
+        [subViews addObject:sugLab];
+    }
+    
+    // 创建心电波形片段
+    NSArray *pointsArr = [ecg readShortFilePoints];
+    CGFloat scale = [pointsArr[2] doubleValue];
+    NSArray *fragmentList = [dic objectForKey:@"fragmentList"];
+    fragmentList = [fragmentList sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+        return [obj1[@"startPose"] integerValue] > [obj2[@"startPose"] integerValue];
+    }];
+    NSArray *posList = [dic objectForKey:@"posList"];
+    NSArray *labelList = [dic objectForKey:@"labelList"];
+    for (NSDictionary *fragment in fragmentList) {
+        // 获取心电波形片段点数据
+        NSInteger startPose = [fragment[@"startPose"] integerValue] / 2; NSInteger endPose = [fragment[@"endPose"] integerValue] / 2;
+        NSArray *waveArray = [pointsArr subarrayWithRange:NSMakeRange(3, pointsArr.count - 3)];   // 点数据数组前3位为标记位, 取点数据时需剔除
+        // 获取tag数组
+        NSInteger tagStartIndex = [posList indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) { if ([obj integerValue] / 2 >= startPose) { *stop = YES; } return *stop; }];
+        NSInteger tagEndIndex = [posList indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) { if ([obj integerValue] / 2 > endPose) { *stop = YES; } return *stop; }];
+        if (tagEndIndex > posList.count) { tagEndIndex = posList.count; }
+        NSArray *tagLocations = [posList subarrayWithRange:NSMakeRange(tagStartIndex, tagEndIndex - tagStartIndex)];
+        NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:10];       // 还原成125采样率后的下标数组
+        [tagLocations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) { [arrM addObject:[NSString stringWithFormat:@"%ld", [obj integerValue] / 2]]; }];
+        NSArray *tagArray = [labelList subarrayWithRange:NSMakeRange(tagStartIndex, tagEndIndex - tagStartIndex)];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate *date = (NSDate *)[formatter dateFromString:ecg.startTime];
+        NSInteger mi = [date timeIntervalSince1970] + (startPose / 125);
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *timeStr = [formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:mi]];
+        
+        ViaReportWave *ecgWave = [[ViaReportWave alloc] initWithFrame:CGRectMake(0, 0, 0, H_PER_ROW+viapadding)
+                                                            waveArray:waveArray
+                                                                range:NSMakeRange(startPose, endPose - startPose)
+                                                                   hz:125
+                                                                ruler:1.0
+                                                                scale:scale];
+        ecgWave.ecgTagArr = tagArray;
+        ecgWave.tagLocations = arrM;
+        ecgWave.startTime = timeStr;
+        ecgWave.symptom = fragment[@"name"];
+        
+        [subViews addObject:ecgWave];
+    }
+    
+    // 创建页底字符
+    NSString *remindStr = @"*由于检测者基本健康情况、检测环境以及设备状态受多因素影响，本报告结果供参考，请您关注心脏健康，根据建议及时就医。 \r\n客服电话：400-622-1120。";
+    UILabel *remindLabel = [[UILabel alloc] init];
+    remindLabel.font = [UIFont systemFontOfSize:11];
+    remindLabel.text = remindStr;
+    remindLabel.textColor = [UIColor colorWithHex:000000];
+    remindLabel.numberOfLines = 0;
+    CGRect labr = [remindStr boundingRectWithSize:CGSizeMake(wave_width, CGFLOAT_MAX)
+                                       options:NSStringDrawingUsesLineFragmentOrigin
+                                    attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]}
+                                       context:nil];
+    CGSize labelSize = labr.size;
+    remindLabel.bounds = CGRectMake(0, 0, labelSize.width, labelSize.height + 14);
+    [subViews addObject:remindLabel];
+    
+    NSArray *imageArr = [self generatePDFPage:subViews];
+    
+    NSString *filePath = [ecg.startTime stringByAppendingString:@".pdf"];
+    [ViaPDFManager createPDFFileWithImage:imageArr toDestFile:filePath];
+    return filePath;
+}
+
+- (NSArray <UIImage *> *)generatePDFPage:(NSMutableArray <UIView *> *)subViews {
+    NSMutableArray <UIImage *> *imageArrM = [NSMutableArray arrayWithCapacity:4];
+    do {
+        ERECGReport *report = [[ERECGReport alloc] initWithFrame:CGRectMake(0, 0, whole_width, whole_height)];
+        CGFloat height = report.contentView.bounds.size.height;
+        while (height > subViews.firstObject.bounds.size.height) {
+            [report.contentView addSubview:subViews.firstObject];
+            [subViews.firstObject mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(report.contentView);
+                make.top.equalTo(report.contentView).offset(report.contentView.bounds.size.height - height);
+                make.height.mas_equalTo(subViews.firstObject.bounds.size.height);
+            }];
+            [subViews.firstObject layoutIfNeeded];
+            
+            height -= subViews.firstObject.bounds.size.height + 10;
+            [subViews removeObject:subViews.firstObject];
+        }
+        [report layoutIfNeeded];
+        [imageArrM addObject:[report captureView]];
+    } while (subViews.count > 0);
+    return imageArrM;
+}
+
+#pragma mark --- 生成报告 并保存URL
+
+- (void)productAIReportWithEcg:(ERRecordECG *)ecg{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ecg.aiReportUrl = [self generateERAIReportFile:ecg];
+        [ecg update];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": ecg}];
+    });
 }
  
 #pragma mark --- MB progress hud

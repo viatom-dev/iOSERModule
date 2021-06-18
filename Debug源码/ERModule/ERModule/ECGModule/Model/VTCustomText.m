@@ -34,7 +34,7 @@ static VTCustomText *_instance = nil;
 - (void)initText{
     _deviceStr = @"设备";
     _recordStr = @"采集";
-    _receiveInterval = 30*60;
+    _receiveInterval = 1*60;
 }
 
 
