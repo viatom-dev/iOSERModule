@@ -270,7 +270,6 @@
             [recordECG setLevelCode:[response objectForKey:@"levelCode"]];
             [recordECG setAiResult:[response objectForKey:@"aiResult"]];
             [recordECG setAiDiagnosis:[response objectForKey:@"aiDiagnosis"]];
-            [recordECG update];
             [self productAIReportWithEcg:recordECG];
         }else {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": recordECG}];

@@ -52,7 +52,13 @@
 - (void)addNewData:(NSNotification *)notification{
     NSDictionary *dic = [notification userInfo];
     ERRecordECG *ecg = [dic objectForKey:@"ecg"];
-    [_listArray addObject:ecg];
+    NSArray *startArr = [_listArray valueForKeyPath:@"@unionOfObjects.startTime"];
+    if ([startArr containsObject:ecg.startTime]) {
+        NSInteger index = [startArr indexOfObject:ecg.startTime];
+        [_listArray replaceObjectAtIndex:index withObject:ecg];
+    }else{
+        [_listArray addObject:ecg];
+    }
     [_listTableView reloadData];
 }
 
