@@ -74,14 +74,26 @@
     userInfo.ecgRecord = ecg;
     [subViews addObject:userInfo];
     
+    NSUInteger responseVer = ecg.responseVer;
     NSDictionary *dic = [ecg dataDicFromData];
     // 创建AI分析建议
-    NSArray *aiResultList = [dic objectForKey:@"aiResultList"];
+    NSArray *aiResultList;
+    if (responseVer == 1) {
+        aiResultList = [dic objectForKey:@"diagnoseList"];
+    } else {
+        aiResultList = [dic objectForKey:@"aiResultList"];
+    }
+    
     for (int i=0; i < aiResultList.count; i++) {
         NSDictionary * tmpDic = aiResultList[i];
-        NSString * tmp = tmpDic[@"phoneContent"];
-        NSString * phoneText =[tmp stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-        NSString *sugStr = [NSString stringWithFormat:@"%@\n%@",tmpDic[@"aiDiagnosis"],phoneText];
+        NSString *sugStr ;
+        if (responseVer == 1) {
+            sugStr = [NSString stringWithFormat:@"%@",tmpDic[@"diagnoseInfo"]];
+        } else {
+            NSString * tmp = tmpDic[@"phoneContent"];
+            NSString * phoneText =[tmp stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+            sugStr = [NSString stringWithFormat:@"%@\n%@",tmpDic[@"aiDiagnosis"],phoneText];
+        }
         UILabel *sugLab = [[UILabel alloc] init];
         sugLab.font = [UIFont systemFontOfSize:11];
         sugLab.text = sugStr;
@@ -99,25 +111,42 @@
     
     // 创建心电波形片段
     NSArray *pointsArr = [ecg readShortFilePoints];
+    if ([pointsArr.firstObject isEqual:@"F-0-01"]) {
+        pointsArr = [pointsArr subarrayWithRange:NSMakeRange(1, pointsArr.count - 1)];
+    }
     CGFloat scale = [pointsArr[2] doubleValue];
-    NSArray *fragmentList = [dic objectForKey:@"fragmentList"];
-    fragmentList = [fragmentList sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-        return [obj1[@"startPose"] integerValue] > [obj2[@"startPose"] integerValue];
-    }];
+    NSArray *fragmentList;
+    if (responseVer == 1) {
+        fragmentList = [dic objectForKey:@"eventList"];
+        fragmentList = [fragmentList sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+            return [obj1[@"startPos"] integerValue] > [obj2[@"startPos"] integerValue];
+        }];
+    } else {
+        fragmentList = [dic objectForKey:@"fragmentList"];
+        fragmentList = [fragmentList sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+            return [obj1[@"startPose"] integerValue] > [obj2[@"startPose"] integerValue];
+        }];
+    }
+    
     NSArray *posList = [dic objectForKey:@"posList"];
     NSArray *labelList = [dic objectForKey:@"labelList"];
     for (NSDictionary *fragment in fragmentList) {
         // 获取心电波形片段点数据
-        NSInteger startPose = [fragment[@"startPose"] integerValue] / 2; NSInteger endPose = [fragment[@"endPose"] integerValue] / 2;
+        NSInteger startPose, endPose;
+        
+        if (responseVer == 1) {
+            startPose = [fragment[@"startPos"] integerValue] / 2;
+            endPose = [fragment[@"endPos"] integerValue] / 2;
+        } else {
+            startPose = [fragment[@"startPose"] integerValue] / 2;
+            endPose = [fragment[@"endPose"] integerValue] / 2;
+        }
+        
+        
         NSArray *waveArray = [pointsArr subarrayWithRange:NSMakeRange(3, pointsArr.count - 3)];   // 点数据数组前3位为标记位, 取点数据时需剔除
-        // 获取tag数组
-        NSInteger tagStartIndex = [posList indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) { if ([obj integerValue] / 2 >= startPose) { *stop = YES; } return *stop; }];
-        NSInteger tagEndIndex = [posList indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) { if ([obj integerValue] / 2 > endPose) { *stop = YES; } return *stop; }];
-        if (tagEndIndex > posList.count) { tagEndIndex = posList.count; }
-        NSArray *tagLocations = [posList subarrayWithRange:NSMakeRange(tagStartIndex, tagEndIndex - tagStartIndex)];
-        NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:10];       // 还原成125采样率后的下标数组
-        [tagLocations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) { [arrM addObject:[NSString stringWithFormat:@"%ld", [obj integerValue] / 2]]; }];
-        NSArray *tagArray = [labelList subarrayWithRange:NSMakeRange(tagStartIndex, tagEndIndex - tagStartIndex)];
+        
+        
+        
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -132,11 +161,39 @@
                                                                    hz:125
                                                                 ruler:1.0
                                                                 scale:scale];
-        ecgWave.ecgTagArr = tagArray;
-        ecgWave.tagLocations = arrM;
-        ecgWave.startTime = timeStr;
-        ecgWave.symptom = fragment[@"name"];
         
+        ecgWave.startTime = timeStr;
+        if (responseVer == 0) {
+            // 获取tag数组
+            NSInteger tagStartIndex = [posList indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                if ([obj integerValue] / 2 >= startPose) {
+                    *stop = YES;
+                }
+                return *stop;
+            }];
+            NSInteger tagEndIndex = [posList indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                if ([obj integerValue] / 2 > endPose) {
+                    *stop = YES;
+                }
+                return *stop;
+            }];
+            
+            if (tagEndIndex > posList.count) {
+                tagEndIndex = posList.count;
+            }
+            NSArray *tagLocations = [posList subarrayWithRange:NSMakeRange(tagStartIndex, tagEndIndex - tagStartIndex)];
+            NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:10];       // 还原成125采样率后的下标数组
+            [tagLocations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                [arrM addObject:[NSString stringWithFormat:@"%ld", [obj integerValue] / 2]];
+            }];
+            
+            NSArray *tagArray = [labelList subarrayWithRange:NSMakeRange(tagStartIndex, tagEndIndex - tagStartIndex)];
+            ecgWave.ecgTagArr = tagArray;
+            ecgWave.tagLocations = arrM;
+            ecgWave.symptom = fragment[@"name"];
+        } else {
+            ecgWave.symptom = fragment[@"eventName"];
+        }
         [subViews addObject:ecgWave];
     }
     
@@ -266,30 +323,60 @@
         [self previewWithEcg:ecg andIndex:index];
     }else{
         [self showWaitLoadingAnimationWithText:@"正在获取AI分析结果..."];
-        [ERSyncManager syncRecordEcg:ecg.fileUrl finished:^(NSString * _Nullable msg, NSInteger code, NSDictionary * _Nullable response) {
-            if (code == 200) {
-                /**
-                 @property (nonatomic, copy) NSString *hr;
-                 @property (nonatomic, copy) NSString *isShowAiResult;
-                 @property (nonatomic, copy) NSString *shortRangeTime;
-                 @property (nonatomic, copy) NSString *sendTime;
-                 @property (nonatomic, copy) NSString *levelCode;
-                 @property (nonatomic, copy) NSString *aiResult;
-                 @property (nonatomic, copy) NSString *aiDiagnosis;
-                 */
-                [ecg setResponseData:response];
-                [ecg setHr:[response objectForKey:@"hr"]];
-                [ecg setIsShowAiResult:[response objectForKey:@"isShowAiResult"]];
-                [ecg setShortRangeTime:[response objectForKey:@"shortRangeTime"]];
-                [ecg setSendTime:[response objectForKey:@"sendTime"]];
-                [ecg setLevelCode:[response objectForKey:@"levelCode"]];
-                [ecg setAiResult:[response objectForKey:@"aiResult"]];
-                [ecg setAiDiagnosis:[response objectForKey:@"aiDiagnosis"]];
+        //        [ERSyncManager syncRecordEcg:ecg.fileUrl finished:^(NSString * _Nullable msg, NSInteger code, NSDictionary * _Nullable response) {
+        //            if (code == 200) {
+        //                /**
+        //                 @property (nonatomic, copy) NSString *hr;
+        //                 @property (nonatomic, copy) NSString *isShowAiResult;
+        //                 @property (nonatomic, copy) NSString *shortRangeTime;
+        //                 @property (nonatomic, copy) NSString *sendTime;
+        //                 @property (nonatomic, copy) NSString *levelCode;
+        //                 @property (nonatomic, copy) NSString *aiResult;
+        //                 @property (nonatomic, copy) NSString *aiDiagnosis;
+        //                 */
+        //                [ecg setResponseData:response];
+        //                [ecg setHr:[response objectForKey:@"hr"]];
+        //                [ecg setIsShowAiResult:[response objectForKey:@"isShowAiResult"]];
+        //                [ecg setShortRangeTime:[response objectForKey:@"shortRangeTime"]];
+        //                [ecg setSendTime:[response objectForKey:@"sendTime"]];
+        //                [ecg setLevelCode:[response objectForKey:@"levelCode"]];
+        //                [ecg setAiResult:[response objectForKey:@"aiResult"]];
+        //                [ecg setAiDiagnosis:[response objectForKey:@"aiDiagnosis"]];
+        //                [ecg update];
+        //                [self.listArray replaceObjectAtIndex:index withObject:ecg];
+        //                [self previewWithEcg:ecg andIndex:index];
+        //            }
+        //        }];
+        [[ERSyncManager sharedInstance] commitECGRecord:ecg finished:^(NSString * _Nullable msg, NSInteger code, NSDictionary * _Nullable response) {
+            if (code == 0) {
+                NSDictionary *result = [response objectForKey:@"analysis_result"];
+                NSDictionary *baseInfo = [result objectForKey:@"baseInfo"];
+                NSDictionary *hrInfo = [result objectForKey:@"hrInfo"];
+                NSDictionary *diagnose = [result objectForKey:@"diagnose"];
+                ecg.isShowAiResult = @"1";
+                ecg.hr = [[hrInfo objectForKey:@"averageHeartRate"] stringValue];
+                ecg.shortRangeTime = [baseInfo objectForKey:@"analysisTime"] ;
+                ecg.sendTime = [baseInfo objectForKey:@"createTime"] ;
+                ecg.aiResult = [diagnose objectForKey:@"diagnoseInfo"];
+                ecg.aiDiagnosis = [diagnose objectForKey:@"diagnoseInfo"] ;
+                [ecg setResponseData:result];
                 [ecg update];
                 [self.listArray replaceObjectAtIndex:index withObject:ecg];
                 [self previewWithEcg:ecg andIndex:index];
+                
+            } else if (code == AIStatusError ||
+                       code == AIStatusOther ||
+                       code == AIStatusNotResp ||
+                       code == AIStatusFileNotUpload ) {
+                // 发送错误， 记录错误
+                ecg.status = code;
+                [ecg update];
+                [self hiddenWaitAnimation];
+            } else {
+                [self hiddenWaitAnimation];
             }
         }];
+        
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -319,7 +406,7 @@
     if (hud == nil) {
         CGSize size = self.view.bounds.size;
         hud = [[MBProgressHUD alloc] initWithFrame:CGRectMake(size.width/2 - 70/2, size.height/2 - 70/2, 70, 70)];
-//        hud.dimBackground = NO;
+        //        hud.dimBackground = NO;
         hud.tag = 888;
         [self.view addSubview:hud];
     }

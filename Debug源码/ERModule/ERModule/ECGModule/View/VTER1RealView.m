@@ -326,7 +326,7 @@ static float spacing = 2.0;
 
 
 - (void)refreshWave{
-    NSLog(@" 池内剩余点数1: %d", _fliterPool.count);
+//    NSLog(@" 池内剩余点数1: %d", _fliterPool.count);
     NSMutableArray *tempArr = [NSMutableArray array];
     if (_fliterPool.count >= SampleRate) {
         refreshPoint = 18;
@@ -356,7 +356,7 @@ static float spacing = 2.0;
             }
         }
     }
-    NSLog(@" 池内剩余点数2: %d", _fliterPool.count);
+//    NSLog(@" 池内剩余点数2: %d", _fliterPool.count);
     if (_runStatus == 1 || _runStatus == 2) {
         if (tempArr.count >= refreshPoint) {
             NSInteger diff = (_drawArray.count+tempArr.count) - val_per_screen*4;

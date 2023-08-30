@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class VTERUser;
+#import "VTERUser.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

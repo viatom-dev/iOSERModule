@@ -54,4 +54,16 @@ static VTCustomText *_instance = nil;
     }
 }
 
+- (VTERUser *)user {
+    if (!_user) {
+        _user = [[VTERUser alloc] init];
+        _user.nickName = @"李四";
+        _user.gender = @"1";
+        _user.dateBirth = @"1992-8-23";
+        _user.phone = @"17722473994";
+        _user.idcard = @"";
+    }
+    return _user;
+}
+
 @end
