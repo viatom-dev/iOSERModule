@@ -48,7 +48,7 @@
 @property (nonatomic, strong) UIView *maskView;
 @property (nonatomic, strong) VTScanDashboard *scanDashboard;
 
- 
+
 @end
 
 @implementation VTER1RealViewController
@@ -139,9 +139,9 @@
 - (void)realClickEvent{
     __weak typeof(self) weakSelf = self;
     _realView.reportHandle = ^{
-//        NSBundle *bundle = [NSBundle bundleForClass:[VTER1HistoryViewController class]];
-//        VTER1HistoryViewController *vc = [[VTER1HistoryViewController alloc] initWithNibName:@"ERModule.framework/VTER1HistoryViewController" bundle:bundle];
-//        [weakSelf.navigationController pushViewController:vc animated:YES];
+        //        NSBundle *bundle = [NSBundle bundleForClass:[VTER1HistoryViewController class]];
+        //        VTER1HistoryViewController *vc = [[VTER1HistoryViewController alloc] initWithNibName:@"ERModule.framework/VTER1HistoryViewController" bundle:bundle];
+        //        [weakSelf.navigationController pushViewController:vc animated:YES];
         VTER1HistoryViewController *vc = [[VTER1HistoryViewController alloc] init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
@@ -170,11 +170,11 @@
             NSData *txtData = [originalTxt dataUsingEncoding:NSUTF8StringEncoding];
             [ERFileManager saveFile:[weakSelf.recordECG.startTime stringByAppendingString:@".txt"] FileData:txtData withDirectoryName:@"VTER1FileFold"];
             [weakSelf.recordECG save];
-//            if (!weakSelf.recordECG.manaul) {
-                [weakSelf autoAiAnalysis:weakSelf.recordECG];
-//            }else{
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": weakSelf.recordECG}];
-//            }
+            //            if (!weakSelf.recordECG.manaul) {
+            [weakSelf autoAiAnalysis:weakSelf.recordECG];
+            //            }else{
+            //                [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": weakSelf.recordECG}];
+            //            }
         }
     };
 }
@@ -182,7 +182,7 @@
 - (void)closeModule{
     [self stopTimer];
     [[VTBLEUtils sharedInstance] cancelConnect:[VTBLEUtils sharedInstance].deviceArray.firstObject];
-//    [VTER1Utils sharedInstance].peripheral = nil;
+    //    [VTER1Utils sharedInstance].peripheral = nil;
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -251,57 +251,45 @@
 
 
 - (void)autoAiAnalysis:(ERRecordECG *)recordECG{
-//    [ERSyncManager syncRecordEcg:recordECG.fileUrl finished:^(NSString * _Nullable msg, NSInteger code, NSDictionary * _Nullable response) {
-//        if (code == 200) {
-//            /**
-//             @property (nonatomic, copy) NSString *hr;
-//             @property (nonatomic, copy) NSString *isShowAiResult;
-//             @property (nonatomic, copy) NSString *shortRangeTime;
-//             @property (nonatomic, copy) NSString *sendTime;
-//             @property (nonatomic, copy) NSString *levelCode;
-//             @property (nonatomic, copy) NSString *aiResult;
-//             @property (nonatomic, copy) NSString *aiDiagnosis;
-//             */
-//            [recordECG setResponseData:response];
-//            [recordECG setHr:[response objectForKey:@"hr"]];
-//            [recordECG setIsShowAiResult:[response objectForKey:@"isShowAiResult"]];
-//            [recordECG setShortRangeTime:[response objectForKey:@"shortRangeTime"]];
-//            [recordECG setSendTime:[response objectForKey:@"sendTime"]];
-//            [recordECG setLevelCode:[response objectForKey:@"levelCode"]];
-//            [recordECG setAiResult:[response objectForKey:@"aiResult"]];
-//            [recordECG setAiDiagnosis:[response objectForKey:@"aiDiagnosis"]];
-//            [self productAIReportWithEcg:recordECG];
-//        }else {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": recordECG}];
-//        }
-//    }];
+    //    [ERSyncManager syncRecordEcg:recordECG.fileUrl finished:^(NSString * _Nullable msg, NSInteger code, NSDictionary * _Nullable response) {
+    //        if (code == 200) {
+    //            /**
+    //             @property (nonatomic, copy) NSString *hr;
+    //             @property (nonatomic, copy) NSString *isShowAiResult;
+    //             @property (nonatomic, copy) NSString *shortRangeTime;
+    //             @property (nonatomic, copy) NSString *sendTime;
+    //             @property (nonatomic, copy) NSString *levelCode;
+    //             @property (nonatomic, copy) NSString *aiResult;
+    //             @property (nonatomic, copy) NSString *aiDiagnosis;
+    //             */
+    //            [recordECG setResponseData:response];
+    //            [recordECG setHr:[response objectForKey:@"hr"]];
+    //            [recordECG setIsShowAiResult:[response objectForKey:@"isShowAiResult"]];
+    //            [recordECG setShortRangeTime:[response objectForKey:@"shortRangeTime"]];
+    //            [recordECG setSendTime:[response objectForKey:@"sendTime"]];
+    //            [recordECG setLevelCode:[response objectForKey:@"levelCode"]];
+    //            [recordECG setAiResult:[response objectForKey:@"aiResult"]];
+    //            [recordECG setAiDiagnosis:[response objectForKey:@"aiDiagnosis"]];
+    //            [self productAIReportWithEcg:recordECG];
+    //        }else {
+    //            [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": recordECG}];
+    //        }
+    //    }];
     
     [[ERSyncManager sharedInstance] commitECGRecord:recordECG finished:^(NSString * _Nullable msg, NSInteger code, NSDictionary * _Nullable response) {
         if (code == 0) {
-            NSDictionary *result = [response objectForKey:@"analysis_result"];
-            NSDictionary *baseInfo = [result objectForKey:@"baseInfo"];
-            NSDictionary *hrInfo = [result objectForKey:@"hrInfo"];
-            NSDictionary *diagnose = [result objectForKey:@"diagnose"];
-            recordECG.isShowAiResult = @"1";
-            recordECG.hr = [[hrInfo objectForKey:@"averageHeartRate"] stringValue];
-            recordECG.shortRangeTime = [baseInfo objectForKey:@"analysisTime"];
-            recordECG.sendTime = [baseInfo objectForKey:@"createTime"];
-            recordECG.aiResult = [diagnose objectForKey:@"diagnoseInfo"];
-            recordECG.aiDiagnosis = [diagnose objectForKey:@"diagnoseInfo"];
-            [recordECG setResponseData:result];
-            [recordECG update];
+            recordECG.isShowAiResult = [response objectForKey:@"isShowAiResult"];
+            recordECG.hr = [response objectForKey:@"hr"];
+            recordECG.shortRangeTime = [response objectForKey:@"shortRangeTime"];
+            recordECG.sendTime = [response objectForKey:@"sendTime"];
+            recordECG.aiResult = [response objectForKey:@"aiResult"];
+            recordECG.aiDiagnosis = [response objectForKey:@"aiDiagnosis"];
+            [recordECG setResponseData:response];
+            //            [recordECG update];
             [self productAIReportWithEcg:recordECG];
             
-        } else if (code == AIStatusError ||
-                   code == AIStatusOther ||
-                   code == AIStatusNotResp ||
-                   code == AIStatusFileNotUpload ) {
-            // 发送错误， 记录错误
-            recordECG.status = code;
-            [recordECG update];
-//            [self hiddenWaitAnimation];
         } else {
-//            [self hiddenWaitAnimation];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": recordECG}];
         }
     }];
 }
@@ -383,7 +371,7 @@
 - (void)util:(VTMURATUtils *)util commandCompletion:(u_char)cmdType deviceType:(VTMDeviceType)deviceType response:(NSData *)response{
     if (deviceType == VTMDeviceTypeECG) {
         if (cmdType == VTMECGCmdGetRealData) {
-//            NSMutableArray *tempArray = [NSMutableArray array];
+            //            NSMutableArray *tempArray = [NSMutableArray array];
             NSMutableArray *originalArray = [NSMutableArray array];  //存储原始数据 用于AI分析
             VTMRealTimeData rd = [VTMBLEParser parseRealTimeData:response];
             VTMRealTimeWF wf = rd.waveform;
@@ -391,7 +379,7 @@
                 short mv = wf.wave_data[i];
                 if (wf.wave_data[i] != 0x7FFF) {// invalid Value
                     [originalArray addObject:@(mv)];
-//                    [tempArray addObject:@([VTMBLEParser mVFromShort:mv])];
+                    //                    [tempArray addObject:@([VTMBLEParser mVFromShort:mv])];
                 }
             }
             VTMRunStatus splitRunStatus = [VTMBLEParser parseStatus:rd.run_para.run_status];
@@ -423,27 +411,18 @@
     userInfo.member = [VTCustomText sharedInstance].user;
     userInfo.ecgRecord = ecg;
     [subViews addObject:userInfo];
-    
-    NSUInteger responseVer = ecg.responseVer;
     NSDictionary *dic = [ecg dataDicFromData];
     // 创建AI分析建议
-    NSArray *aiResultList;
-    if (responseVer == 1) {
-        aiResultList = [dic objectForKey:@"diagnoseList"];
-    } else {
-        aiResultList = [dic objectForKey:@"aiResultList"];
-    }
+    NSArray *aiResultList = [dic objectForKey:@"aiResultList"];
+    
     
     for (int i=0; i < aiResultList.count; i++) {
         NSDictionary * tmpDic = aiResultList[i];
         NSString *sugStr ;
-        if (responseVer == 1) {
-            sugStr = [NSString stringWithFormat:@"%@",tmpDic[@"diagnoseInfo"]];
-        } else {
-            NSString * tmp = tmpDic[@"phoneContent"];
-            NSString * phoneText =[tmp stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
-            sugStr = [NSString stringWithFormat:@"%@\n%@",tmpDic[@"aiDiagnosis"],phoneText];
-        }
+        NSString * tmp = tmpDic[@"phoneContent"];
+        NSString * phoneText =[tmp stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+        sugStr = [NSString stringWithFormat:@"%@\n%@",tmpDic[@"aiDiagnosis"],phoneText];
+        
         UILabel *sugLab = [[UILabel alloc] init];
         sugLab.font = [UIFont systemFontOfSize:11];
         sugLab.text = sugStr;
@@ -452,9 +431,9 @@
         sugLab.layer.borderWidth = 1;
         sugLab.layer.borderColor = [UIColor blackColor].CGColor;
         CGRect r = [sugStr boundingRectWithSize:CGSizeMake(wave_width, CGFLOAT_MAX)
-                                           options:NSStringDrawingUsesLineFragmentOrigin
-                                        attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]}
-                                           context:nil];
+                                        options:NSStringDrawingUsesLineFragmentOrigin
+                                     attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]}
+                                        context:nil];
         sugLab.bounds = CGRectMake(0, 0, r.size.width, r.size.height + 14);
         [subViews addObject:sugLab];
     }
@@ -466,17 +445,12 @@
     }
     CGFloat scale = [pointsArr[2] doubleValue];
     NSArray *fragmentList;
-    if (responseVer == 1) {
-        fragmentList = [dic objectForKey:@"eventList"];
-        fragmentList = [fragmentList sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-            return [obj1[@"startPos"] integerValue] > [obj2[@"startPos"] integerValue];
-        }];
-    } else {
-        fragmentList = [dic objectForKey:@"fragmentList"];
-        fragmentList = [fragmentList sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-            return [obj1[@"startPose"] integerValue] > [obj2[@"startPose"] integerValue];
-        }];
-    }
+    
+    fragmentList = [dic objectForKey:@"fragmentList"];
+    fragmentList = [fragmentList sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+        return [obj1[@"startPose"] integerValue] > [obj2[@"startPose"] integerValue];
+    }];
+    
     
     NSArray *posList = [dic objectForKey:@"posList"];
     NSArray *labelList = [dic objectForKey:@"labelList"];
@@ -485,13 +459,10 @@
         // 获取心电波形片段点数据
         NSInteger startPose, endPose;
         
-        if (responseVer == 1) {
-            startPose = [fragment[@"startPos"] integerValue] / 2;
-            endPose = [fragment[@"endPos"] integerValue] / 2;
-        } else {
-            startPose = [fragment[@"startPose"] integerValue] / 2;
-            endPose = [fragment[@"endPose"] integerValue] / 2;
-        }
+        
+        startPose = [fragment[@"startPose"] integerValue] / 2;
+        endPose = [fragment[@"endPose"] integerValue] / 2;
+        
         
         NSArray *waveArray = [pointsArr subarrayWithRange:NSMakeRange(3, pointsArr.count - 3)];   // 点数据数组前3位为标记位, 取点数据时需剔除
         
@@ -513,37 +484,34 @@
                                                                 scale:scale];
         
         ecgWave.startTime = timeStr;
-        if (responseVer == 0) {
-            // 获取tag数组
-            NSInteger tagStartIndex = [posList indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-                if ([obj integerValue] / 2 >= startPose) {
-                    *stop = YES;
-                }
-                return *stop;
-            }];
-            NSInteger tagEndIndex = [posList indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-                if ([obj integerValue] / 2 > endPose) {
-                    *stop = YES;
-                }
-                return *stop;
-            }];
-            
-            if (tagEndIndex > posList.count) {
-                tagEndIndex = posList.count;
+        
+        NSInteger tagStartIndex = [posList indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            if ([obj integerValue] / 2 >= startPose) {
+                *stop = YES;
             }
-            NSArray *tagLocations = [posList subarrayWithRange:NSMakeRange(tagStartIndex, tagEndIndex - tagStartIndex)];
-            NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:10];       // 还原成125采样率后的下标数组
-            [tagLocations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                [arrM addObject:[NSString stringWithFormat:@"%ld", [obj integerValue] / 2]];
-            }];
-            
-            NSArray *tagArray = [labelList subarrayWithRange:NSMakeRange(tagStartIndex, tagEndIndex - tagStartIndex)];
-            ecgWave.ecgTagArr = tagArray;
-            ecgWave.tagLocations = arrM;
-            ecgWave.symptom = fragment[@"name"];
-        } else {
-            ecgWave.symptom = fragment[@"eventName"];
+            return *stop;
+        }];
+        NSInteger tagEndIndex = [posList indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            if ([obj integerValue] / 2 > endPose) {
+                *stop = YES;
+            }
+            return *stop;
+        }];
+        
+        if (tagEndIndex > posList.count) {
+            tagEndIndex = posList.count;
         }
+        NSArray *tagLocations = [posList subarrayWithRange:NSMakeRange(tagStartIndex, tagEndIndex - tagStartIndex)];
+        NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:10];       // 还原成125采样率后的下标数组
+        [tagLocations enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [arrM addObject:[NSString stringWithFormat:@"%ld", [obj integerValue] / 2]];
+        }];
+        
+        NSArray *tagArray = [labelList subarrayWithRange:NSMakeRange(tagStartIndex, tagEndIndex - tagStartIndex)];
+        ecgWave.ecgTagArr = tagArray;
+        ecgWave.tagLocations = arrM;
+        ecgWave.symptom = fragment[@"name"];
+        
         [subViews addObject:ecgWave];
     }
     
@@ -555,9 +523,9 @@
     remindLabel.textColor = [UIColor colorWithHex:000000];
     remindLabel.numberOfLines = 0;
     CGRect labr = [remindStr boundingRectWithSize:CGSizeMake(wave_width, CGFLOAT_MAX)
-                                       options:NSStringDrawingUsesLineFragmentOrigin
-                                    attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]}
-                                       context:nil];
+                                          options:NSStringDrawingUsesLineFragmentOrigin
+                                       attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11]}
+                                          context:nil];
     CGSize labelSize = labr.size;
     remindLabel.bounds = CGRectMake(0, 0, labelSize.width, labelSize.height + 14);
     [subViews addObject:remindLabel];
@@ -601,7 +569,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RecordEcgSaved" object:nil userInfo:@{@"ecg": ecg}];
     });
 }
- 
+
 #pragma mark --- MB progress hud
 
 - (void)showWarningAndErrorString:(NSString*)text
@@ -645,7 +613,7 @@
     if (hud == nil) {
         CGSize size = self.view.bounds.size;
         hud = [[MBProgressHUD alloc] initWithFrame:CGRectMake(size.width/2 - 70/2, size.height/2 - 70/2, 70, 70)];
-//        hud.dimBackground = NO;
+        //        hud.dimBackground = NO;
         hud.tag = 888;
         [self.view addSubview:hud];
     }
@@ -669,5 +637,5 @@
 }
 
 
-    
+
 @end

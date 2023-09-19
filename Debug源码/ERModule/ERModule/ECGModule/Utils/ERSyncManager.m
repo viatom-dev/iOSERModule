@@ -195,7 +195,7 @@ static ERSyncManager *_instance = nil;
             NSInteger code = [[responseObject objectForKey:@"code"] intValue];
             if (code == 0) {
                 NSDictionary *dataInfo = [responseObject objectForKey:@"data"];
-                callback(msg, code, dataInfo);
+                callback(msg, code, [self sqlDictFromNewServerDict:dataInfo]);
             } else {
                 callback(msg, -1, nil);
             }
@@ -206,6 +206,61 @@ static ERSyncManager *_instance = nil;
 }
 
 
+
+/// 新接口数据映射到老接口
+- (NSDictionary *)sqlDictFromNewServerDict:(NSDictionary *)dict {
+    
+    NSDictionary *result = [dict objectForKey:@"analysis_result"];
+    NSDictionary *baseInfo = [result objectForKey:@"baseInfo"];
+    NSDictionary *hrInfo = [result objectForKey:@"hrInfo"];
+    NSDictionary *diagnose = [result objectForKey:@"diagnose"];
+    
+    NSArray *diagnoseList = [result objectForKey:@"diagnoseList"];
+    NSMutableArray *tempArr = [NSMutableArray array];
+    for (int i = 0; i < diagnoseList.count; i ++) {
+        NSDictionary *diaDict = diagnoseList[i];
+        NSDictionary *resultDict = @{
+            @"aiDiagnosis": [diaDict objectForKey:@"diagnoseInfo"],
+            @"code":@"",
+            @"content":@"",
+            @"cover":@"",
+            @"phoneContent":@"",
+            @"video":@""
+        };
+        [tempArr addObject:resultDict];
+    }
+    NSMutableArray *tempArr1 = [NSMutableArray array];
+    NSArray *eventList = [result objectForKey:@"eventList"];
+    
+    for (int i = 0; i < eventList.count; i ++) {
+        NSDictionary *eventDict = eventList[i];
+        NSDictionary *fragmentDict = @{
+            @"code":  eventDict[@"eventCode"],
+            @"endPose": eventDict[@"endPos"],
+            @"hr": eventDict[@"hr"],
+            @"name": eventDict[@"eventName"],
+            @"startPose": eventDict[@"startPos"]
+        };
+        [tempArr1 addObject:fragmentDict];
+    }
+    
+    
+    NSDictionary *sqlDict = @{
+        @"aiDiagnosis": [diagnose objectForKey:@"diagnoseInfo"],
+        @"aiResult": [diagnose objectForKey:@"diagnoseInfo"],
+        @"aiResultList": tempArr.copy,
+        @"analysisId": [dict objectForKey:@"analysis_id"],
+        @"fragmentList":tempArr1.copy,
+        @"hr": [[hrInfo objectForKey:@"averageHeartRate"] stringValue],
+        @"id": @0,
+        @"pdfName":@"",
+        @"recordId": @0,
+        @"sendTime": [baseInfo objectForKey:@"createTime"],
+        @"isShowAiResult": @"1",
+    };
+    return sqlDict;
+    
+}
 
 
 // 生成对应的json字典

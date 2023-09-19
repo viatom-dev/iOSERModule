@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedInstance;
 
-+ (void)syncRecordEcg:(NSString *)recordFileUrl finished:(SyncEcgFileCallBack)callback;
 
 - (void)commitECGRecord:(ERRecordECG *)ecgModel finished:(SyncEcgFileCallBack)callback;
 
